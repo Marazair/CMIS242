@@ -1,5 +1,5 @@
 
-public class ArrayAnalyzer {
+public class ArrayBreaker {
 	private static final int ARRAY_SIZE = 10;
 	private static final int MEANINGLESS_DATA = 0;
 	
