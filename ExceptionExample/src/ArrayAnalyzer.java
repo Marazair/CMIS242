@@ -9,7 +9,7 @@ public class ArrayAnalyzer {
 	}
 	
 	public static void CreateArray(int[] array){
-		for(int x = 0; x < ARRAY_SIZE; x++){
+		for(int x = 0; x < array.length; x++){
 			array[x] = MEANINGLESS_DATA;
 		}
 		
@@ -17,6 +17,6 @@ public class ArrayAnalyzer {
 	}
 	
 	public static void BreakArray(int[] array){
-		System.out.println(array[ARRAY_SIZE]);
+		System.out.println(array[array.length]);
 	}
 }
