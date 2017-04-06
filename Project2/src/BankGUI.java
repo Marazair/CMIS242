@@ -9,12 +9,19 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.text.*;
+import java.beans.*;
 
-public class BankGUI extends JPanel implements ActionListener{
+public class BankGUI extends JPanel implements ActionListener, PropertyChangeListener {
 	
-	public BankGUI(){
-		Account checkingAccount = new Account(0);
-		Account savingsAccount = new Account(0);
+	private Account account;
+	private Account checkingAccount;
+	private Account savingsAccount;
+	private double amount;
+	private JFormattedTextField amountField;
+	
+	public BankGUI() {
+		checkingAccount = new Account(0);
+		savingsAccount = new Account(0);
 		
 		JButton withdraw = new JButton("Withdraw");
 		withdraw.setActionCommand("withdraw");
@@ -37,8 +44,11 @@ public class BankGUI extends JPanel implements ActionListener{
 		ButtonGroup accounts = new ButtonGroup();
 		accounts.add(savings);
 		accounts.add(checking);
+		checking.setSelected(true);
 		
-		JFormattedTextField amountField = new JFormattedTextField(NumberFormat.getCurrencyInstance());
+		amountField = new JFormattedTextField(NumberFormat.getCurrencyInstance());
+		amountField.setColumns(10);
+		amountField.addPropertyChangeListener("value", this);
 		
 		withdraw.addActionListener(this);
 		deposit.addActionListener(this);
@@ -75,17 +85,38 @@ public class BankGUI extends JPanel implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e) {
 		if("withdraw".equals(e.getActionCommand())) {
-			
+			if((amount % 20) == 0){
+				try {
+					account.withdraw(amount);
+				}
+				catch(InsufficientFunds ex) {
+					
+				}
+			}
 		}
 		else if("deposit".equals(e.getActionCommand())) {
+			account.deposit(amount);
+			System.out.println(account.balance());
+		}
+		else if("transfer".equals(e.getActionCommand())) {
 			
 		}
-		else if("transfer".equals(e.getActionCommand())){
+		else if("balance".equals(e.getActionCommand())) {
 			
 		}
-		else if("balance".equals(e.getActionCommand())){
-			
+		else if("checking".equals(e.getActionCommand())) {
+			account = checkingAccount;
 		}
+		else if("savings".equals(e.getActionCommand())) {
+			account = savingsAccount;
+		}
+	}
+
+	public void propertyChange(PropertyChangeEvent e) {
+		Object source = e.getSource();
 		
+		if(source == amountField) {
+			amount = ((Number)amountField.getValue()).doubleValue();
+		}
 	}
 }
