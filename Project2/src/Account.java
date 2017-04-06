@@ -23,18 +23,22 @@ public class Account {
 			accountTotal -= amount;
 			withdrawls++;
 		}
+		
 		else{
 			InsufficientFunds i = new InsufficientFunds();
 			throw i;
 		}
 	}
 	
-	public void deposit(double amount){
+	public void deposit(double amount) {
 		accountTotal += amount;
 	}
 	
 	public void transfer(double amount, Account otherAccount) throws InsufficientFunds {
 		withdraw(amount);
 		otherAccount.deposit(amount);
+	}
+	public double balance() {
+		return accountTotal;
 	}
 }
