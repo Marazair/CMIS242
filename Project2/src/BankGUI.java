@@ -2,7 +2,7 @@
  * File Name: BankGUI.java
  * Name: Nick Mills
  * Date: 4/7/17
- * Purpose: Create a GUI through which 
+ * Purpose: Create a GUI through which one can perform several actions on both their checking and savings accounts.
  */
 
 import java.awt.*;
