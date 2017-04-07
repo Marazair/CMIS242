@@ -14,10 +14,11 @@ import java.beans.*;
 public class BankGUI extends JPanel implements ActionListener, PropertyChangeListener {
 	
 	private Account account;
+	private Account offAccount;
 	private Account checkingAccount;
 	private Account savingsAccount;
 	private double amount = 0;
-	private JFormattedTextField amountField;
+	private AmountField amountField;
 	
 	public BankGUI() {
 		checkingAccount = new Account(0);
@@ -46,8 +47,9 @@ public class BankGUI extends JPanel implements ActionListener, PropertyChangeLis
 		accounts.add(checking);
 		checking.setSelected(true);
 		account = checkingAccount;
+		offAccount = savingsAccount;
 		
-		amountField = new JFormattedTextField(NumberFormat.getCurrencyInstance());
+		amountField = new AmountField(NumberFormat.getCurrencyInstance());
 		amountField.setColumns(10);
 		amountField.setValue(new Double(0.00));
 		amountField.addPropertyChangeListener("value", this);
@@ -76,7 +78,7 @@ public class BankGUI extends JPanel implements ActionListener, PropertyChangeLis
 	public static void main(String args[]) {
 		JFrame frame = new JFrame("ATM");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+		JOptionPane.showMessageDialog(frame, "Check dialog");
 		BankGUI bank = new BankGUI();
 		bank.setOpaque(true);
 		frame.setContentPane(bank);
@@ -87,7 +89,7 @@ public class BankGUI extends JPanel implements ActionListener, PropertyChangeLis
 	
 	public void actionPerformed(ActionEvent e) {
 		if("withdraw".equals(e.getActionCommand())) {
-			if((amount % 20) == 0){
+			if((amount % 20) == 0) {
 				try {
 					account.withdraw(amount);
 				}
@@ -101,16 +103,24 @@ public class BankGUI extends JPanel implements ActionListener, PropertyChangeLis
 			System.out.println(account.balance());
 		}
 		else if("transfer".equals(e.getActionCommand())) {
-			
+			try {
+				account.transfer(amount, offAccount);
+			}
+			catch(InsufficientFunds ex) {
+				
+			}
 		}
 		else if("balance".equals(e.getActionCommand())) {
-			
+			JFrame frame = new JFrame("Balance");
+			JOptionPane.showMessageDialog(frame, "The current balance is " + account.balance() + ".");
 		}
 		else if("checking".equals(e.getActionCommand())) {
 			account = checkingAccount;
+			offAccount = savingsAccount;
 		}
 		else if("savings".equals(e.getActionCommand())) {
 			account = savingsAccount;
+			offAccount = checkingAccount;
 		}
 	}
 

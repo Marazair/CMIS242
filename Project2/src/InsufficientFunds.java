@@ -6,6 +6,5 @@
  */
 
 public class InsufficientFunds extends Exception{
-	private static final long serialVersionUID = 7873326070461717954L;
 
 }
