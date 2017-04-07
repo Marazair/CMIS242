@@ -16,7 +16,7 @@ public class BankGUI extends JPanel implements ActionListener, PropertyChangeLis
 	private Account account;
 	private Account checkingAccount;
 	private Account savingsAccount;
-	private double amount;
+	private double amount = 0;
 	private JFormattedTextField amountField;
 	
 	public BankGUI() {
@@ -45,9 +45,11 @@ public class BankGUI extends JPanel implements ActionListener, PropertyChangeLis
 		accounts.add(savings);
 		accounts.add(checking);
 		checking.setSelected(true);
+		account = checkingAccount;
 		
 		amountField = new JFormattedTextField(NumberFormat.getCurrencyInstance());
 		amountField.setColumns(10);
+		amountField.setValue(new Double(0.00));
 		amountField.addPropertyChangeListener("value", this);
 		
 		withdraw.addActionListener(this);
