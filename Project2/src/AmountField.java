@@ -14,6 +14,7 @@ public class AmountField extends JFormattedTextField{
 		super(format);
 	}
 	
+	//Changes the invalidEdit behavior of JFormattedTextField to inform the user of the proper input format.
 	@Override
 	protected void invalidEdit(){
 		JFrame frame = new JFrame("Invalid Input");
