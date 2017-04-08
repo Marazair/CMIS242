@@ -19,8 +19,10 @@ public class BankGUI extends JPanel implements ActionListener, PropertyChangeLis
 	private Account savingsAccount;
 	private double amount = 0;
 	private AmountField amountField;
+	private static JFrame ErrorFrame = new JFrame("Error");
 	
 	public BankGUI() {
+		super.setLayout(new GridLayout(6,3));
 		checkingAccount = new Account(0);
 		savingsAccount = new Account(0);
 		
@@ -78,7 +80,7 @@ public class BankGUI extends JPanel implements ActionListener, PropertyChangeLis
 	public static void main(String args[]) {
 		JFrame frame = new JFrame("ATM");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		JOptionPane.showMessageDialog(frame, "Check dialog");
+		
 		BankGUI bank = new BankGUI();
 		bank.setOpaque(true);
 		frame.setContentPane(bank);
@@ -89,13 +91,16 @@ public class BankGUI extends JPanel implements ActionListener, PropertyChangeLis
 	
 	public void actionPerformed(ActionEvent e) {
 		if("withdraw".equals(e.getActionCommand())) {
-			if((amount % 20) == 0) {
+			if(((amount % 20) == 0) && (amount != 0)) {
 				try {
 					account.withdraw(amount);
 				}
 				catch(InsufficientFunds ex) {
-					
+					JOptionPane.showMessageDialog(BankGUI.ErrorFrame, "Insufficient funds in the account.");
 				}
+			}
+			else {
+				JOptionPane.showMessageDialog(BankGUI.ErrorFrame, "Withdrawls must be in increments of $20.");
 			}
 		}
 		else if("deposit".equals(e.getActionCommand())) {
@@ -107,7 +112,7 @@ public class BankGUI extends JPanel implements ActionListener, PropertyChangeLis
 				account.transfer(amount, offAccount);
 			}
 			catch(InsufficientFunds ex) {
-				
+				JOptionPane.showMessageDialog(BankGUI.ErrorFrame, "Insufficient funds in the account.");
 			}
 		}
 		else if("balance".equals(e.getActionCommand())) {
