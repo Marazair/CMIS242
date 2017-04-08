@@ -40,7 +40,7 @@ public class BankGUI extends JPanel implements ActionListener, PropertyChangeLis
 		JButton deposit = new JButton("Deposit");
 		deposit.setActionCommand("deposit");
 		
-		JButton transfer = new JButton("Transfer from");
+		JButton transfer = new JButton("Transfer to");
 		transfer.setActionCommand("transfer");
 		
 		JButton balance = new JButton("Balance");
@@ -107,29 +107,29 @@ public class BankGUI extends JPanel implements ActionListener, PropertyChangeLis
 			if(((amount % 20) == 0) && (amount != 0)) {
 				try {
 					account.withdraw(amount);
+					JOptionPane.showMessageDialog(PopupFrame, "Withdrawl of " + amount + " successful.");
 				}
 				catch(InsufficientFunds ex) {
-					JOptionPane.showMessageDialog(BankGUI.PopupFrame, "Insufficient funds in the account.");
+					JOptionPane.showMessageDialog(PopupFrame, "Insufficient funds in the account.");
 				}
 			}
 			else {
-				JOptionPane.showMessageDialog(BankGUI.PopupFrame, "Withdrawls must be in increments of $20.");
+				JOptionPane.showMessageDialog(PopupFrame, "Withdrawls must be in increments of $20.");
 			}
 		}
 		else if("deposit".equals(e.getActionCommand())) {
 			account.deposit(amount);
-			System.out.println(account.balance());
 		}
 		else if("transfer".equals(e.getActionCommand())) {
 			try {
-				account.transfer(amount, offAccount);
+				offAccount.transfer(amount, account);
 			}
 			catch(InsufficientFunds ex) {
-				JOptionPane.showMessageDialog(BankGUI.PopupFrame, "Insufficient funds in the account.");
+				JOptionPane.showMessageDialog(PopupFrame, "Insufficient funds in the account.");
 			}
 		}
 		else if("balance".equals(e.getActionCommand())) {
-			JOptionPane.showMessageDialog(BankGUI.PopupFrame, "The current balance is " + account.balance() + ".");
+			JOptionPane.showMessageDialog(PopupFrame, "The current balance is " + account.balance() + ".");
 		}
 		else if("checking".equals(e.getActionCommand())) {
 			account = checkingAccount;

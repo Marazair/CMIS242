@@ -6,6 +6,7 @@
  */
 public class Account {
 	private static final double SERVICE_CHARGE = 1.50;
+	private static final boolean FREE_TRANSFERS = true;
 	
 	private static int withdrawls = 0;
 	private double accountTotal = 0;
@@ -15,16 +16,16 @@ public class Account {
 	}
 	
 	public void withdraw(double amount) throws InsufficientFunds {
-		if(withdrawls >= 4){
+		if (withdrawls >= 4){
 			amount += SERVICE_CHARGE;
 		}
 		
-		if(accountTotal - amount >= 0){
+		if (accountTotal - amount >= 0){
 			accountTotal -= amount;
 			withdrawls++;
 		}
 		
-		else{
+		else {
 			InsufficientFunds i = new InsufficientFunds();
 			throw i;
 		}
