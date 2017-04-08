@@ -2,7 +2,7 @@
  * File Name: Account.java
  * Name: Nick Mills
  * Date: 4/7/17
- * Purpose: 
+ * Purpose: Creates account management methods for use with the BankGUI.
  */
 public class Account {
 	private static final double SERVICE_CHARGE = 1.50;
