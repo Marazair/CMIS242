@@ -21,6 +21,7 @@ public class BankGUI extends JPanel implements ActionListener, PropertyChangeLis
 	private double amount = 0;
 	private AmountField amountField;
 	private static JFrame PopupFrame = new JFrame("PopUp");
+	private NumberFormat currency = NumberFormat.getCurrencyInstance();
 	
 	public BankGUI() {
 		super.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -59,7 +60,7 @@ public class BankGUI extends JPanel implements ActionListener, PropertyChangeLis
 		account = checkingAccount;
 		offAccount = savingsAccount;
 		
-		amountField = new AmountField(NumberFormat.getCurrencyInstance());
+		amountField = new AmountField(currency);
 		amountField.setColumns(10);
 		amountField.setValue(new Double(0.00));
 		amountField.addPropertyChangeListener("value", this);
@@ -107,10 +108,10 @@ public class BankGUI extends JPanel implements ActionListener, PropertyChangeLis
 			if(((amount % 20) == 0) && (amount != 0)) {
 				try {
 					account.withdraw(amount);
-					JOptionPane.showMessageDialog(PopupFrame, "Withdrawl of " + amount + " successful.");
+					JOptionPane.showMessageDialog(PopupFrame, "Withdrawl of " + currency.format(amount) + " successful." + Account.serviceChargeApplied());
 				}
 				catch(InsufficientFunds ex) {
-					JOptionPane.showMessageDialog(PopupFrame, "Insufficient funds in the account.");
+					JOptionPane.showMessageDialog(PopupFrame, "Insufficient funds in the account." + Account.serviceChargeApplied());
 				}
 			}
 			else {
@@ -129,7 +130,7 @@ public class BankGUI extends JPanel implements ActionListener, PropertyChangeLis
 			}
 		}
 		else if("balance".equals(e.getActionCommand())) {
-			JOptionPane.showMessageDialog(PopupFrame, "The current balance is " + account.balance() + ".");
+			JOptionPane.showMessageDialog(PopupFrame, "The current balance is " + currency.format(account.balance()) + ".");
 		}
 		else if("checking".equals(e.getActionCommand())) {
 			account = checkingAccount;
