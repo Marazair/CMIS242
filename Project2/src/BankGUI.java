@@ -7,6 +7,7 @@
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.*;
 import java.awt.event.*;
 import java.text.*;
 import java.beans.*;
@@ -19,10 +20,17 @@ public class BankGUI extends JPanel implements ActionListener, PropertyChangeLis
 	private Account savingsAccount;
 	private double amount = 0;
 	private AmountField amountField;
-	private static JFrame ErrorFrame = new JFrame("Error");
+	private static JFrame PopupFrame = new JFrame("PopUp");
 	
 	public BankGUI() {
-		super.setLayout(new GridLayout(6,3));
+		super.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+		Border padding = BorderFactory.createEmptyBorder(10, 10, 10, 10);
+		this.setBorder(padding);
+		
+		JPanel transactionButtons = new JPanel(new GridLayout(2,2,10,10));
+		JPanel accountButtons = new JPanel(new FlowLayout());
+		JPanel textPanel = new JPanel(new FlowLayout());
+		
 		checkingAccount = new Account(0);
 		savingsAccount = new Account(0);
 		
@@ -68,13 +76,18 @@ public class BankGUI extends JPanel implements ActionListener, PropertyChangeLis
 		transfer.setToolTipText("Transfer the typed amount from the selected account to the other account.");
 		balance.setToolTipText("Displays current balance of selected account.");
 		
-		add(withdraw);
-		add(deposit);
-		add(transfer);
-		add(balance);
-		add(checking);
-		add(savings);
-		add(amountField);
+		add(transactionButtons);
+		transactionButtons.add(withdraw);
+		transactionButtons.add(deposit);
+		transactionButtons.add(transfer);
+		transactionButtons.add(balance);
+		
+		add(accountButtons);
+		accountButtons.add(checking);
+		accountButtons.add(savings);
+		
+		add(textPanel);
+		textPanel.add(amountField);
 	}
 	
 	public static void main(String args[]) {
@@ -96,11 +109,11 @@ public class BankGUI extends JPanel implements ActionListener, PropertyChangeLis
 					account.withdraw(amount);
 				}
 				catch(InsufficientFunds ex) {
-					JOptionPane.showMessageDialog(BankGUI.ErrorFrame, "Insufficient funds in the account.");
+					JOptionPane.showMessageDialog(BankGUI.PopupFrame, "Insufficient funds in the account.");
 				}
 			}
 			else {
-				JOptionPane.showMessageDialog(BankGUI.ErrorFrame, "Withdrawls must be in increments of $20.");
+				JOptionPane.showMessageDialog(BankGUI.PopupFrame, "Withdrawls must be in increments of $20.");
 			}
 		}
 		else if("deposit".equals(e.getActionCommand())) {
@@ -112,12 +125,11 @@ public class BankGUI extends JPanel implements ActionListener, PropertyChangeLis
 				account.transfer(amount, offAccount);
 			}
 			catch(InsufficientFunds ex) {
-				JOptionPane.showMessageDialog(BankGUI.ErrorFrame, "Insufficient funds in the account.");
+				JOptionPane.showMessageDialog(BankGUI.PopupFrame, "Insufficient funds in the account.");
 			}
 		}
 		else if("balance".equals(e.getActionCommand())) {
-			JFrame frame = new JFrame("Balance");
-			JOptionPane.showMessageDialog(frame, "The current balance is " + account.balance() + ".");
+			JOptionPane.showMessageDialog(BankGUI.PopupFrame, "The current balance is " + account.balance() + ".");
 		}
 		else if("checking".equals(e.getActionCommand())) {
 			account = checkingAccount;
