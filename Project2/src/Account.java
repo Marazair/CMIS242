@@ -24,6 +24,8 @@ public class Account {
 		withdraw(false, amount);
 	}
 	
+	//Attempts to withdraw the given amount from the current accountTotal.
+	//Increments withdrawls and potentially applies a service charge if the transaction is not free.
 	public void withdraw(boolean freeTransaction, double amount) throws InsufficientFunds{
 		if ((withdrawls >= FREE_WITHDRAWLS) && (freeTransaction == false)){
 			amount += SERVICE_CHARGE;
@@ -41,18 +43,24 @@ public class Account {
 		}
 	}
 	
+	//Adds the given amount to the current accountTotal.
 	public void deposit(double amount) {
 		accountTotal += amount;
 	}
 	
+	//Transfers money from the current account's accountTotal to the otherAccount's accountTotal.
 	public void transfer(double amount, Account otherAccount) throws InsufficientFunds {
 		withdraw(FREE_TRANSFERS, amount);
 		otherAccount.deposit(amount);
 	}
+	
+	//Returns current accountTotal.
 	public double balance() {
 		return accountTotal;
 	}
 	
+	//Checks to see if the user is getting close to incurring a service charge or is currently incurring a service charge.
+	//Returns a string informing them of this status.
 	public static String serviceChargeApplied() {
 		String ret = "";
 		
