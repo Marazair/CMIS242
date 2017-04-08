@@ -61,7 +61,7 @@ public class BankGUI extends JPanel implements ActionListener, PropertyChangeLis
 		offAccount = savingsAccount;
 		
 		amountField = new AmountField(currency);
-		amountField.setColumns(10);
+		amountField.setColumns(20);
 		amountField.setValue(new Double(0.00));
 		amountField.addPropertyChangeListener("value", this);
 		
