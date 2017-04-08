@@ -13,6 +13,8 @@ import java.text.*;
 import java.beans.*;
 
 public class BankGUI extends JPanel implements ActionListener, PropertyChangeListener {
+	private static final double CHECKING_DEFAULT_AMOUNT = 0;
+	private static final double SAVINGS_DEFAULT_AMOUNT = 0;
 	
 	private Account account;
 	private Account offAccount;
@@ -32,8 +34,8 @@ public class BankGUI extends JPanel implements ActionListener, PropertyChangeLis
 		JPanel accountButtons = new JPanel(new FlowLayout());
 		JPanel textPanel = new JPanel(new FlowLayout());
 		
-		checkingAccount = new Account(0);
-		savingsAccount = new Account(0);
+		checkingAccount = new Account(CHECKING_DEFAULT_AMOUNT);
+		savingsAccount = new Account(SAVINGS_DEFAULT_AMOUNT);
 		
 		JButton withdraw = new JButton("Withdraw");
 		withdraw.setActionCommand("withdraw");
@@ -74,7 +76,7 @@ public class BankGUI extends JPanel implements ActionListener, PropertyChangeLis
 		
 		withdraw.setToolTipText("Withdraw the typed amount from the selected account. (Must be in increments of $20)");
 		deposit.setToolTipText("Deposit the typed amount to the selected account.");
-		transfer.setToolTipText("Transfer the typed amount from the selected account to the other account.");
+		transfer.setToolTipText("Transfer the typed amount to the selected account from the other account.");
 		balance.setToolTipText("Displays current balance of selected account.");
 		
 		add(transactionButtons);

@@ -12,6 +12,10 @@ public class Account {
 	private static int withdrawls = 0;
 	private double accountTotal = 0;
 	
+	public Account(){
+		accountTotal = 0;
+	}
+	
 	public Account(double accountTotal) {
 		this.accountTotal = accountTotal;
 	}
