@@ -42,7 +42,7 @@ public class BankGUI extends JPanel implements ActionListener, PropertyChangeLis
 		checking.setActionCommand("checking");
 		
 		JRadioButtonMenuItem savings = new JRadioButtonMenuItem("Savings");
-		checking.setActionCommand("savings");
+		savings.setActionCommand("savings");
 		
 		ButtonGroup accounts = new ButtonGroup();
 		accounts.add(savings);
