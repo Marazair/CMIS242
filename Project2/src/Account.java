@@ -6,7 +6,7 @@
  */
 public class Account {
 	private static final double SERVICE_CHARGE = 1.50;
-	private static final int FREE_withdrawalS = 4;
+	private static final int FREE_WITHDRAWALS = 4;
 	private static final boolean FREE_TRANSFERS = true;
 	
 	private static int withdrawals = 0;
@@ -27,7 +27,7 @@ public class Account {
 	//Attempts to withdraw the given amount from the current accountTotal.
 	//Increments withdrawals and potentially applies a service charge if the transaction is not free.
 	public void withdraw(boolean freeTransaction, double amount) throws InsufficientFunds{
-		if ((withdrawals >= FREE_withdrawalS) && (freeTransaction == false)){
+		if ((withdrawals >= FREE_WITHDRAWALS) && (freeTransaction == false)){
 			amount += SERVICE_CHARGE;
 		}
 		
@@ -64,11 +64,11 @@ public class Account {
 	public static String serviceChargeApplied() {
 		String ret = "";
 		
-		if (withdrawals == FREE_withdrawalS) {
+		if (withdrawals == FREE_WITHDRAWALS) {
 			ret = " A $1.50 service charge will be applied on your next withdrawal";
 		}
 		
-		else if (withdrawals > FREE_withdrawalS) {
+		else if (withdrawals > FREE_WITHDRAWALS) {
 			ret = " $1.50 service charge is being applied.";
 		}
 		
