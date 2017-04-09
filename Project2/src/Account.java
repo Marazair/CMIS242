@@ -5,8 +5,13 @@
  * Purpose: Creates account management methods for use with the BankGUI.
  */
 public class Account {
+	//Sets the service charge.
 	private static final double SERVICE_CHARGE = 1.50;
+	
+	//Sets how many withdrawals are allowed before the service charge is applied.
 	private static final int FREE_WITHDRAWALS = 4;
+	
+	//Sets whether transfers should count as withdrawals or not.
 	private static final boolean FREE_TRANSFERS = true;
 	
 	private static int withdrawals = 0;
@@ -65,7 +70,7 @@ public class Account {
 		String ret = "";
 		
 		if (withdrawals == FREE_WITHDRAWALS) {
-			ret = " A $1.50 service charge will be applied on your next withdrawal";
+			ret = " A $1.50 service charge will be applied on your next withdrawal.";
 		}
 		
 		else if (withdrawals > FREE_WITHDRAWALS) {

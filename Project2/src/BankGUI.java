@@ -131,7 +131,7 @@ public class BankGUI extends JPanel implements ActionListener, PropertyChangeLis
 				//Attempt to withdraw the amount from the selected account. If successful, inform the user. Warn and inform user of service charges.
 				try {
 					account.withdraw(amount);
-					JOptionPane.showMessageDialog(PopupFrame, "withdrawal of " + currency.format(amount) + " successful." + Account.serviceChargeApplied());
+					JOptionPane.showMessageDialog(PopupFrame, "Withdrawal of " + currency.format(amount) + " successful." + Account.serviceChargeApplied());
 				}
 				
 				//If unsuccessful, inform the user. Inform user of service charges.
@@ -142,7 +142,7 @@ public class BankGUI extends JPanel implements ActionListener, PropertyChangeLis
 			
 			//If amount is not divisible by 20 or is zero, inform user of the proper amounts.
 			else {
-				JOptionPane.showMessageDialog(PopupFrame, "withdrawals must be in increments of $20.");
+				JOptionPane.showMessageDialog(PopupFrame, "Withdrawals must be in increments of $20.");
 			}
 		}
 		
