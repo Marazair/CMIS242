@@ -15,8 +15,8 @@ import java.beans.*;
 public class BankGUI extends JPanel implements ActionListener, PropertyChangeListener {
 	
 	//These are the values which will be passed to the Account constructors for the savings and checking accounts.
-	private static final double CHECKING_DEFAULT_AMOUNT = 500;
-	private static final double SAVINGS_DEFAULT_AMOUNT = 500;
+	private static final double CHECKING_DEFAULT_AMOUNT = 0;
+	private static final double SAVINGS_DEFAULT_AMOUNT = 0;
 	
 	private Account account;
 	private Account offAccount;
