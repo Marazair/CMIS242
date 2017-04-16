@@ -7,6 +7,8 @@ import java.util.*;
 
 public class PizzaGUI extends JPanel implements ActionListener{
 	private String crust;
+	private String size;
+	private List<String> toppings = new ArrayList<String>();
 	
 	public PizzaGUI(){
 		super.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -16,6 +18,19 @@ public class PizzaGUI extends JPanel implements ActionListener{
 		JRadioButtonMenuItem small = new JRadioButtonMenuItem("Small");
 		small.setActionCommand("small");
 		
+		JRadioButtonMenuItem medium = new JRadioButtonMenuItem("Medium");
+		medium.setActionCommand("medium");
+		
+		JRadioButtonMenuItem large = new JRadioButtonMenuItem("Large");
+		large.setActionCommand("large");
+		
+		ButtonGroup sizes = new ButtonGroup();
+		sizes.add(small);
+		sizes.add(medium);
+		sizes.add(large);
+		
+		medium.setSelected(true);
+		size = "medium";
 		
 		JRadioButtonMenuItem white = new JRadioButtonMenuItem("White");
 		white.setActionCommand("white");
@@ -39,14 +54,19 @@ public class PizzaGUI extends JPanel implements ActionListener{
 		
 		JCheckBox onions = new JCheckBox("Onions");
 		
-		JCheckBox greenPeppers = new JCheckBox("Green Peppers");
+		JCheckBox peppers = new JCheckBox("Peppers");
 		
-		JCheckBox bananaPeppers = new JCheckBox("Banana Peppers");
+		JButton submit = new JButton("Submit");
+		submit.setActionCommand("submit");
 		
-		
+		add(small);
+		add(medium);
+		add(large);
 		
 		add(white);
 		add(wheat);
+		
+		
 	}
 
 	public static void main(String[] args) {
