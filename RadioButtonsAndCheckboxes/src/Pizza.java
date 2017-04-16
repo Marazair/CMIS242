@@ -2,15 +2,17 @@ import java.util.*;
 
 public class Pizza {
 	private String crust;
+	private String size;
 	private List<String> toppings = new ArrayList<String>();
 	
-	public Pizza(String crust, List<String> toppings) {
+	public Pizza(String size, String crust, List<String> toppings) {
+		this.size = size;
 		this.crust = crust;
 		this.toppings = toppings;
 	}
 	
 	public String toString() {
-		String str = "Your pizza on " + crust + " crust with ";
+		String str = "Your " + size + " pizza on " + crust + " crust with ";
 		for (int x = 0; x < toppings.size(); x++) {
 			if (x != 0) {
 				str += ", ";
