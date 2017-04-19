@@ -9,11 +9,12 @@ public class SequenceGUI extends JPanel implements ActionListener {
 	private JTextField efficiencyField = new JTextField(10);
 	
 	public SequenceGUI() {
-		super.setLayout(new GridLayout(2,5,10,10));
+		super.setLayout(new GridLayout(5,2,10,10));
 		Border padding = BorderFactory.createEmptyBorder(10, 10, 10, 10);
 		this.setBorder(padding);
 		
-		JPanel emptyPanel = new JPanel();
+		JPanel radioPanel = new JPanel(new GridLayout(2,1,0,0));
+		
 		JRadioButtonMenuItem iterative = new JRadioButtonMenuItem("Iterative");
 		iterative.setActionCommand("iterative");
 		
@@ -27,6 +28,28 @@ public class SequenceGUI extends JPanel implements ActionListener {
 		JLabel result = new JLabel("Result:");
 		JLabel efficiency = new JLabel("Efficiency:");
 		
+		iterative.addActionListener(this);
+		recursive.addActionListener(this);
+		compute.addActionListener(this);
+		
+		nField.addActionListener(this);
+		resultField.addActionListener(this);
+		efficiencyField.addActionListener(this);
+		
+		add(new JLabel(""));
+		
+		radioPanel.add(iterative);
+		radioPanel.add(recursive);
+		add(radioPanel);
+		
+		add(n);
+		add(nField);
+		add(new JLabel(""));
+		add(compute);
+		add(result);
+		add(resultField);
+		add(efficiency);
+		add(efficiencyField);
 	}
 	
 	
