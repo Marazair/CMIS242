@@ -64,6 +64,7 @@ public class SequenceGUI extends JPanel implements ActionListener {
 		frame.pack();
 		frame.setVisible(true);
 		System.out.println(Sequence.computeIterative(5));
+		System.out.println(Sequence.computeRecursive(5));
 	}
 
 	@Override
