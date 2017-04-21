@@ -27,7 +27,7 @@ public class SequenceGUI extends JPanel implements ActionListener {
 		
 		JRadioButtonMenuItem iterative = new JRadioButtonMenuItem("Iterative");
 		iterative.setActionCommand("iterative");
-		iterative.setEnabled(true);
+		iterative.setSelected(true);
 		currentMethod = "iterative";
 		
 		JRadioButtonMenuItem recursive = new JRadioButtonMenuItem("Recursive");
