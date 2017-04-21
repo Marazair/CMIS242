@@ -42,11 +42,7 @@ public final class Sequence {
 	}
 	
 	private static int recursive (int n) {
-		if(n - efficiency == 0) {
-			return currentTerm;
-		}
-		efficiency++;
-		return currentTerm + recursive(n);
+		return 0;
 	}
 	
 	public static int getEfficiency() {

@@ -6,6 +6,8 @@
  */
 
 import java.awt.event.*;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.*;
@@ -116,8 +118,25 @@ public class SequenceGUI extends JPanel implements ActionListener {
 		}
 	}
 	
-	public class FileEventHandler extends WindowAdapter{
-		
+	public class SequenceFileEventHandler extends WindowAdapter{
+		@Override
+		public void windowClosed(WindowEvent e) {
+			try {
+				PrintWriter writer = new PrintWriter("info.txt", "UTF-8");
+				for(int x = 0; x <= 10; x++){
+					writer.print(x + ", ");
+					Sequence.computeIterative(x);
+					writer.print(Sequence.getEfficiency() + ", ");
+					Sequence.computeRecursive(x);
+					writer.print(Sequence.getEfficiency());
+				}
+				writer.close();
+			}
+			catch (IOException ex) {
+				JFrame popupFrame = new JFrame("Popup");
+				JOptionPane.showMessageDialog(popupFrame, "Problem with writing to file.");
+			}
+		}
 	}
 
 }
