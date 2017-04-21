@@ -10,6 +10,7 @@ public final class Sequence {
 	}
 	
 	public static int computeIterative(int n) {
+		efficiency = 0;
 		
 		for (int x = 0; x <= n; x++) {
 			if (x == 0) {

@@ -5,8 +5,11 @@ import javax.swing.border.*;
 
 public class SequenceGUI extends JPanel implements ActionListener {
 	private JTextField nField = new JTextField(10);
-	private JTextField resultField = new JTextField(10);
-	private JTextField efficiencyField = new JTextField(10);
+	private JFormattedTextField resultField = new JFormattedTextField(10);
+	private JFormattedTextField efficiencyField = new JFormattedTextField(10);
+	
+	private String currentMethod;
+	private int n;
 	
 	public SequenceGUI() {
 		super.setLayout(new GridLayout(5,2,10,10));
@@ -17,15 +20,21 @@ public class SequenceGUI extends JPanel implements ActionListener {
 		
 		JRadioButtonMenuItem iterative = new JRadioButtonMenuItem("Iterative");
 		iterative.setActionCommand("iterative");
+		iterative.setEnabled(true);
+		currentMethod = "iterative";
 		
 		JRadioButtonMenuItem recursive = new JRadioButtonMenuItem("Recursive");
 		recursive.setActionCommand("recursive");
 		
+		ButtonGroup methods = new ButtonGroup();
+		methods.add(iterative);
+		methods.add(recursive);
+		
 		JButton compute = new JButton("Compute");
 		compute.setActionCommand("compute");
 		
-		JLabel n = new JLabel("Enter n:");
-		JLabel result = new JLabel("Result:");
+		JLabel nLabel = new JLabel("Enter n:");
+		JLabel resultLabel = new JLabel("Result:");
 		JLabel efficiency = new JLabel("Efficiency:");
 		
 		iterative.addActionListener(this);
@@ -34,7 +43,11 @@ public class SequenceGUI extends JPanel implements ActionListener {
 		
 		nField.addActionListener(this);
 		resultField.addActionListener(this);
+		resultField.setText("");
+		resultField.setEditable(false);
 		efficiencyField.addActionListener(this);
+		efficiencyField.setText("");
+		efficiencyField.setEditable(false);
 		
 		add(new JLabel(""));
 		
@@ -42,11 +55,11 @@ public class SequenceGUI extends JPanel implements ActionListener {
 		radioPanel.add(recursive);
 		add(radioPanel);
 		
-		add(n);
+		add(nLabel);
 		add(nField);
 		add(new JLabel(""));
 		add(compute);
-		add(result);
+		add(resultLabel);
 		add(resultField);
 		add(efficiency);
 		add(efficiencyField);
@@ -69,7 +82,31 @@ public class SequenceGUI extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+		if ("iterative".equals(e.getActionCommand())) {
+			currentMethod = "iterative";
+		}
+		if ("recursive".equals(e.getActionCommand())) {
+			currentMethod = "recursive";
+		}
+		if ("compute".equals(e.getActionCommand())) {
+			
+			try {
+				n = Integer.parseInt(nField.getText());
+				
+				if (currentMethod == "iterative") {
+					resultField.setText(Integer.toString(Sequence.computeIterative(n)));
+				}
+				else if (currentMethod == "recursive") {
+					resultField.setText(Integer.toString(Sequence.computeRecursive(n)));
+				}
+				
+				efficiencyField.setText(Integer.toString(Sequence.getEfficiency()));
+			}
+			catch (NumberFormatException ex) {
+				JFrame popupFrame = new JFrame("Popup");
+				JOptionPane.showMessageDialog(popupFrame, "Please put an integer into the field for n.");
+			}
+		}
 	}
 	
 	public class FileEventHandler extends WindowAdapter{
