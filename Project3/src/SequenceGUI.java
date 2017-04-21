@@ -1,3 +1,10 @@
+/*
+ * File Name: SequenceGUI.java
+ * Name: Nick Mills
+ * Date: 4/17/17
+ * Purpose: Provide a GUI for interacting with the Sequence class.
+ */
+
 import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;

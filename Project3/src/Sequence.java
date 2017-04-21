@@ -1,4 +1,9 @@
-
+/*
+ * File Name: Sequence.java
+ * Name: Nick Mills
+ * Date: 4/17/17
+ * Purpose: Calculate the numbers in the sequence using both iterative and recursive methods.
+ */
 public final class Sequence {
 	private static int currentTerm;
 	private static int efficiency = 0;
