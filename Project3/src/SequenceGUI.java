@@ -16,8 +16,8 @@ public class SequenceGUI extends JPanel implements ActionListener {
 	private JTextField nField = new JTextField(10);
 	private JFormattedTextField resultField = new JFormattedTextField(10);
 	private JFormattedTextField efficiencyField = new JFormattedTextField(10);
-	
-	private String currentMethod;
+	private JRadioButtonMenuItem recursive = new JRadioButtonMenuItem("Recursive");
+	private JRadioButtonMenuItem iterative = new JRadioButtonMenuItem("Iterative");
 	private int n;
 	
 	public SequenceGUI() {
@@ -26,14 +26,7 @@ public class SequenceGUI extends JPanel implements ActionListener {
 		this.setBorder(padding);
 		
 		JPanel radioPanel = new JPanel(new GridLayout(2,1,0,0));
-		
-		JRadioButtonMenuItem iterative = new JRadioButtonMenuItem("Iterative");
-		iterative.setActionCommand("iterative");
 		iterative.setSelected(true);
-		currentMethod = "iterative";
-		
-		JRadioButtonMenuItem recursive = new JRadioButtonMenuItem("Recursive");
-		recursive.setActionCommand("recursive");
 		
 		ButtonGroup methods = new ButtonGroup();
 		methods.add(iterative);
@@ -46,17 +39,12 @@ public class SequenceGUI extends JPanel implements ActionListener {
 		JLabel resultLabel = new JLabel("Result:");
 		JLabel efficiency = new JLabel("Efficiency:");
 		
-		iterative.addActionListener(this);
-		recursive.addActionListener(this);
-		compute.addActionListener(this);
-		
-		nField.addActionListener(this);
-		resultField.addActionListener(this);
 		resultField.setText("");
 		resultField.setEditable(false);
-		efficiencyField.addActionListener(this);
 		efficiencyField.setText("");
 		efficiencyField.setEditable(false);
+		
+		compute.addActionListener(this);
 		
 		add(new JLabel(""));
 		
@@ -77,11 +65,12 @@ public class SequenceGUI extends JPanel implements ActionListener {
 	
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("Sequence");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		SequenceGUI sequence = new SequenceGUI();
+		SequenceFileEventHandler fileWriter = new SequenceFileEventHandler();
 		sequence.setOpaque(true);
 		frame.setContentPane(sequence);
+		frame.addWindowListener(fileWriter);
 		
 		frame.pack();
 		frame.setVisible(true);
@@ -91,21 +80,15 @@ public class SequenceGUI extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if ("iterative".equals(e.getActionCommand())) {
-			currentMethod = "iterative";
-		}
-		if ("recursive".equals(e.getActionCommand())) {
-			currentMethod = "recursive";
-		}
 		if ("compute".equals(e.getActionCommand())) {
 			
 			try {
 				n = Integer.parseInt(nField.getText());
 				
-				if (currentMethod == "iterative") {
+				if (iterative.isSelected()) {
 					resultField.setText(Integer.toString(Sequence.computeIterative(n)));
 				}
-				else if (currentMethod == "recursive") {
+				else if (recursive.isSelected()) {
 					resultField.setText(Integer.toString(Sequence.computeRecursive(n)));
 				}
 				
@@ -118,7 +101,11 @@ public class SequenceGUI extends JPanel implements ActionListener {
 		}
 	}
 	
-	public class SequenceFileEventHandler extends WindowAdapter{
+	public static class SequenceFileEventHandler extends WindowAdapter{
+		public SequenceFileEventHandler() {
+			
+		}
+		
 		@Override
 		public void windowClosed(WindowEvent e) {
 			try {
@@ -129,8 +116,10 @@ public class SequenceGUI extends JPanel implements ActionListener {
 					writer.print(Sequence.getEfficiency() + ", ");
 					Sequence.computeRecursive(x);
 					writer.print(Sequence.getEfficiency());
+					writer.println();
 				}
 				writer.close();
+				System.out.println("called");
 			}
 			catch (IOException ex) {
 				JFrame popupFrame = new JFrame("Popup");
@@ -138,5 +127,4 @@ public class SequenceGUI extends JPanel implements ActionListener {
 			}
 		}
 	}
-
 }

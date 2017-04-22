@@ -5,10 +5,9 @@
  * Purpose: Calculate the numbers in the sequence using both iterative and recursive methods.
  */
 public final class Sequence {
-	private static int currentTerm;
+	
 	private static int efficiency = 0;
-	private static int previousTerm;
-	private static int temp;
+	
 	
 	private Sequence() {
 		
@@ -16,6 +15,9 @@ public final class Sequence {
 	
 	public static int computeIterative(int n) {
 		efficiency = 0;
+		int currentTerm = 0;
+		int previousTerm = 0;
+		int temp;
 		
 		for (int x = 0; x <= n; x++) {
 			if (x == 0) {
@@ -42,7 +44,16 @@ public final class Sequence {
 	}
 	
 	private static int recursive (int n) {
-		return 0;
+		if (n == 0) {
+			efficiency++;
+			return 0;
+		}
+		else if (n == 1) {
+			efficiency++;
+			return 1;
+		}
+		
+		return 2 * recursive(n-1) + recursive(n-2);
 	}
 	
 	public static int getEfficiency() {
