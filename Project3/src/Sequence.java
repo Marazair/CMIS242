@@ -65,6 +65,7 @@ public final class Sequence {
 			return 1;
 		}
 		
+		efficiency++;
 		return 2 * recursive(n-1) + recursive(n-2);
 	}
 	
