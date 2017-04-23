@@ -17,7 +17,7 @@ public final class Sequence {
 		efficiency = 0;
 		int currentTerm = 0;
 		int previousTerm = 0;
-		int temp;
+		int temp = 0;
 		
 		for (int x = 0; x <= n; x++) {
 			if (x == 0) {
@@ -52,7 +52,7 @@ public final class Sequence {
 			efficiency++;
 			return 1;
 		}
-		efficiency++;
+		
 		return 2 * recursive(n-1) + recursive(n-2);
 	}
 	

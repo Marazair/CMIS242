@@ -13,11 +13,13 @@ import javax.swing.*;
 import javax.swing.border.*;
 
 public class SequenceGUI extends JPanel implements ActionListener {
+	//Create and initialize the interactable objects in the GUI.
 	private JTextField nField = new JTextField(10);
 	private JFormattedTextField resultField = new JFormattedTextField(10);
 	private JFormattedTextField efficiencyField = new JFormattedTextField(10);
 	private JRadioButtonMenuItem recursive = new JRadioButtonMenuItem("Recursive");
 	private JRadioButtonMenuItem iterative = new JRadioButtonMenuItem("Iterative");
+	
 	private int n;
 	
 	public SequenceGUI() {
@@ -74,8 +76,7 @@ public class SequenceGUI extends JPanel implements ActionListener {
 		
 		frame.pack();
 		frame.setVisible(true);
-		System.out.println(Sequence.computeIterative(5));
-		System.out.println(Sequence.computeRecursive(5));
+			
 	}
 
 	@Override
@@ -103,11 +104,11 @@ public class SequenceGUI extends JPanel implements ActionListener {
 	
 	public static class SequenceFileEventHandler extends WindowAdapter{
 		public SequenceFileEventHandler() {
-			
+			super();
 		}
 		
 		@Override
-		public void windowClosed(WindowEvent e) {
+		public void windowClosing(WindowEvent e) {
 			try {
 				PrintWriter writer = new PrintWriter("info.txt", "UTF-8");
 				for(int x = 0; x <= 10; x++){
@@ -119,7 +120,8 @@ public class SequenceGUI extends JPanel implements ActionListener {
 					writer.println();
 				}
 				writer.close();
-				System.out.println("called");
+				JFrame popupFrame = new JFrame("Popup");
+				JOptionPane.showMessageDialog(popupFrame, "File has been written.");
 			}
 			catch (IOException ex) {
 				JFrame popupFrame = new JFrame("Popup");
