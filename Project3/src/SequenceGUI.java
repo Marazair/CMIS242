@@ -114,6 +114,8 @@ public class SequenceGUI extends JPanel implements ActionListener {
 			}
 			//If the text field contains something that cannot be translated into an integer, inform the user.
 			catch (NumberFormatException ex) {
+				resultField.setText("");
+				efficiencyField.setText("");
 				JFrame popupFrame = new JFrame("Popup");
 				JOptionPane.showMessageDialog(popupFrame, "Please put an integer into the field for n.");
 			}
