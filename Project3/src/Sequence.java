@@ -26,6 +26,7 @@ public final class Sequence {
 		int previousTerm = 0;
 		int temp = 0;
 		
+		//Calculate the nth term.
 		for (int x = 0; x <= n; x++) {
 			
 			if (x == 0) {
