@@ -152,19 +152,24 @@ public class StudentDatabase extends JPanel implements ActionListener{
 					//Create an array containing the different grade choices.
 					Object[] gradeChoices = {'A','B','C','D','F'};
 					
-					//Display a popup that contains a dropdown to select the grade input and cast it into a char.
+					//Display a popup that contains a dropdown to select the grade input.
 					char grade = (char)JOptionPane.showInputDialog(null, "Choose grade:", "Grade", 
 												JOptionPane.INFORMATION_MESSAGE, null, gradeChoices, gradeChoices[0]);
 					
-					//Create an array 
+					//Create an array for different possible credit values.
 					Object[] creditsChoices = {3,6};
+					
+					//Display a popup that contains a dropdown to select the credit value input.
 					int credits = (int)JOptionPane.showInputDialog(null, "Choose credits:", "Credits", 
 												JOptionPane.INFORMATION_MESSAGE, null, creditsChoices, creditsChoices[0]);
 					
+					//Update the student with the new values.
 					database.get(key).courseCompleted(grade, credits);
 					
+					//Display the student info with the updated GPA and inform the user that the update occurred.
 					JOptionPane.showMessageDialog(popupFrame, "Student " + key + ": " + database.get(key).toString() + ". Update complete.");
 				}
+				//If the key is not present, inform the user.
 				else {
 					JOptionPane.showMessageDialog(popupFrame, "Database does not contain the specified student ID.");
 				}
