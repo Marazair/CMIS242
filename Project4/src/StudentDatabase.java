@@ -103,12 +103,12 @@ public class StudentDatabase extends JPanel implements ActionListener{
 					if (database.containsKey(key)) {
 						
 						//If it does, inform the user and ask for a new one.
-						JOptionPane.showMessageDialog(popupFrame, "Student ID already in use. Please select a different ID.");
+						invalidId(popupFrame, currentOption);
 					}
 					else {
 						//If the ID is free, insert the student into the database and inform the user.
 						database.put(key, new Student(name, major));
-						JOptionPane.showMessageDialog(popupFrame, "Insertion of student " + key + ": " + database.get(key).toString() + " successful.");
+						JOptionPane.showMessageDialog(popupFrame, "Insertion of Student " + key + ": " + database.get(key).toString() + " successful.");
 					}
 				
 				//If either field is empty, ask for proper input.
@@ -132,7 +132,7 @@ public class StudentDatabase extends JPanel implements ActionListener{
 				}
 				else {
 					//If it isn't, inform the user that the ID is not present.
-					JOptionPane.showMessageDialog(popupFrame, "Database does not contain the specified student ID.");
+					invalidId(popupFrame, currentOption);
 				}
 			}
 			else if (currentOption.equals("Find")) {
@@ -143,7 +143,7 @@ public class StudentDatabase extends JPanel implements ActionListener{
 				}
 				else {
 					//If it isn't, inform the user that the ID is not present.
-					JOptionPane.showMessageDialog(popupFrame, "Database does not contain the specified student ID.");
+					invalidId(popupFrame, currentOption);
 				}
 			}
 			else if (currentOption.equals("Update")) {
@@ -171,7 +171,7 @@ public class StudentDatabase extends JPanel implements ActionListener{
 				}
 				//If the key is not present, inform the user.
 				else {
-					JOptionPane.showMessageDialog(popupFrame, "Database does not contain the specified student ID.");
+					invalidId(popupFrame, currentOption);
 				}
 			}
 		}
@@ -179,6 +179,16 @@ public class StudentDatabase extends JPanel implements ActionListener{
 		//If idField does not contain an integer, ask for one.
 		catch (NumberFormatException ex) {
 			JOptionPane.showMessageDialog(popupFrame, "Please put an integer into the ID field.");
+		}
+	}
+	
+	//Checks to see which invalid ID message is appropriate and displays the correct one.
+	public void invalidId(JFrame frame, String option) {
+		if (option.equals("Insert")) {
+			JOptionPane.showMessageDialog(frame, "Student ID already in use. Please select a different ID.");
+		}
+		else {
+			JOptionPane.showMessageDialog(frame, "Database does not contain the specified student ID.");
 		}
 	}
 }
