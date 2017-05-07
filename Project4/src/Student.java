@@ -58,6 +58,6 @@ public class Student {
 			GPA = 4.0;
 		}
 		
-		return "Name: " + name + ", Major: " + major + ", GPA:" + numberFormat.format(GPA);
+		return "Name: " + name + ", Major: " + major + ", GPA: " + numberFormat.format(GPA);
 	}
 }
