@@ -88,13 +88,13 @@ public class StudentDatabase extends JPanel implements ActionListener{
 		try {
 			int key = Integer.parseInt(idField.getText());
 			
-			//Set variable for the current options.
+			//Set variables for the current options.
 			String currentOption = optionDropdown.getSelectedItem().toString();
+			String name = nameField.getText();
+			String major = majorField.getText();
 			
 			if (currentOption.equals("Insert")) {
 				//Set variables for the current name and major.
-				String name = nameField.getText();
-				String major = majorField.getText();
 				
 				//Make sure neither field is empty.
 				if (!name.equals("") && !major.equals("")) {
@@ -109,6 +109,7 @@ public class StudentDatabase extends JPanel implements ActionListener{
 						//If the ID is free, insert the student into the database and inform the user.
 						database.put(key, new Student(name, major));
 						JOptionPane.showMessageDialog(popupFrame, "Insertion of Student " + key + ": " + database.get(key).toString() + " successful.");
+						clearFields(popupFrame, currentOption, name, major);
 					}
 				
 				//If either field is empty, ask for proper input.
@@ -134,6 +135,8 @@ public class StudentDatabase extends JPanel implements ActionListener{
 					//If it isn't, inform the user that the ID is not present.
 					invalidId(popupFrame, currentOption);
 				}
+				
+				clearFields(popupFrame, currentOption, name, major);
 			}
 			else if (currentOption.equals("Find")) {
 				//Check to make sure the key is present.
@@ -145,6 +148,8 @@ public class StudentDatabase extends JPanel implements ActionListener{
 					//If it isn't, inform the user that the ID is not present.
 					invalidId(popupFrame, currentOption);
 				}
+				
+				clearFields(popupFrame, currentOption, name, major);
 			}
 			else if (currentOption.equals("Update")) {
 				//Check to make sure the key is present.
@@ -173,6 +178,8 @@ public class StudentDatabase extends JPanel implements ActionListener{
 				else {
 					invalidId(popupFrame, currentOption);
 				}
+				
+				clearFields(popupFrame, currentOption, name, major);
 			}
 		}
 		
@@ -189,6 +196,16 @@ public class StudentDatabase extends JPanel implements ActionListener{
 		}
 		else {
 			JOptionPane.showMessageDialog(frame, "Database does not contain the specified student ID.");
+		}
+	}
+	
+	//Empty fields to avoid misleading data.
+	public void clearFields(JFrame frame, String option, String name, String major) {
+		nameField.setText("");
+		majorField.setText("");
+		
+		if (!option.equals("Insert") && (!name.equals("") || !major.equals(""))) {
+			JOptionPane.showMessageDialog(frame, "Any input in the name or major fields is irrelevant for requests other than Insert.");
 		}
 	}
 }
