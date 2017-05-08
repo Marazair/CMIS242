@@ -11,7 +11,7 @@ import javax.swing.*;
 import javax.swing.border.*;
 import java.util.*;
 
-public class StudentDatabase extends JPanel implements ActionListener{
+public class StudentDatabase extends JPanel implements ActionListener {
 	
 	//Create the various text fields.
 	private JTextField idField = new JTextField(10);
@@ -27,7 +27,7 @@ public class StudentDatabase extends JPanel implements ActionListener{
 	
 	public StudentDatabase() {
 		//Set the layout and pad the edge of the window.
-		super.setLayout(new GridLayout(5,2,10,10));
+		this.setLayout(new GridLayout(5,2,10,10));
 		Border padding = BorderFactory.createEmptyBorder(10, 10, 10, 10);
 		this.setBorder(padding);
 		
@@ -49,7 +49,7 @@ public class StudentDatabase extends JPanel implements ActionListener{
 		//Default to Insert.
 		optionDropdown.setSelectedIndex(0);
 		
-		//Create a button that triggers the appropriate 
+		//Create a button that triggers the appropriate action.
 		JButton processButton = new JButton("Process Request");
 		processButton.addActionListener(this);
 		
@@ -199,11 +199,12 @@ public class StudentDatabase extends JPanel implements ActionListener{
 		}
 	}
 	
-	//Empty fields to avoid misleading data.
+	//Empties fields to avoid misleading data.
 	public void clearFields(JFrame frame, String option, String name, String major) {
 		nameField.setText("");
 		majorField.setText("");
 		
+		//If an option other than Insert is being used, inform the user that name and major are only used for Insert.
 		if (!option.equals("Insert") && (!name.equals("") || !major.equals(""))) {
 			JOptionPane.showMessageDialog(frame, "Any input in the name or major fields is irrelevant for requests other than Insert.");
 		}

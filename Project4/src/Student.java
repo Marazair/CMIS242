@@ -30,16 +30,16 @@ public class Student {
 		if (grade == 'A') {
 			qualityPoints += (4*credits);
 		}
-		else if(grade == 'B') {
+		else if (grade == 'B') {
 			qualityPoints += (3*credits);
 		}
-		else if(grade == 'C') {
+		else if (grade == 'C') {
 			qualityPoints += (2*credits);
 		}
-		else if(grade == 'D') {
+		else if (grade == 'D') {
 			qualityPoints += (1*credits);
 		}
-		else if(grade == 'F') {
+		else if (grade == 'F') {
 			qualityPoints += (0*credits);
 		}
 	}
