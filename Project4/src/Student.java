@@ -44,20 +44,21 @@ public class Student {
 		}
 	}
 	
-	//Returns the name, major and formatted GPA.
-	public String toString() {
-		DecimalFormat numberFormat = new DecimalFormat("#.0");
-		double GPA;
-		
+	private double calculateGPA() {
 		//If the student has taken courses, calculate GPA.
 		if(totalCredits != 0) {
-			GPA = (double)qualityPoints/totalCredits;
+			return (double)qualityPoints/totalCredits;
 		}
 		//Otherwise, default the GPA to 4.0.
 		else {
-			GPA = 4.0;
+			return 4.0;
 		}
-		
+	}
+	
+	//Returns the name, major and formatted GPA.
+	public String toString() {
+		DecimalFormat numberFormat = new DecimalFormat("#.0");
+		double GPA = calculateGPA();
 		return "Name: " + name + ", Major: " + major + ", GPA: " + numberFormat.format(GPA);
 	}
 }
